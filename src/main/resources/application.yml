@@ -1,0 +1,17 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    hibernate.ddl-auto: validate #Eğer Create olursa tabloyu baştan yaratır
+server:
+  error:
+    include-message: always
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/trabzon_db
+#    username: postgres
+#    password: 180200
+#    driverClassName: org.postgresql.Driver
+
