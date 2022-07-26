@@ -38,8 +38,6 @@ public class UserController {
 
     @PostMapping("/addUser")
     public DefUsers userAdd(@RequestParam String name, @RequestParam String pass){
-
-
           DefUsers defUsers = new DefUsers();
           defUsers.setName(name);
           defUsers.setPass(pass);
