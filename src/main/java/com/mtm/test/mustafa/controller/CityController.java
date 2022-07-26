@@ -53,11 +53,12 @@ public class CityController {
         Optional<DefCity> data = cityRepository.findById(id);
         if(data.isPresent())
         {
-            cityRepository.deleteById(id);
-            return "Şehir başarıyla silindi";
+                cityRepository.deleteById(id);
+                return "Şehir başarıyla silindi";
+
         }
         else {
-            throw new MtmException("Şehir bulunamadı !");
+            throw new MtmException("Şehir Bulunamadı !");
         }
     }
 

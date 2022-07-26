@@ -3,13 +3,16 @@ package com.mtm.test.mustafa.controller;
 import com.mtm.test.mustafa.entity.DefUsers;
 import com.mtm.test.mustafa.exception.MtmException;
 import com.mtm.test.mustafa.repository.DefUsersRepository;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class UserController {
+    private BeanPropertyRowMapper<DefUsers> bprm= new BeanPropertyRowMapper<DefUsers>(DefUsers.class);
     private DefUsersRepository usersRepository;
     private JdbcTemplate jdbcTemplate;
 
@@ -19,10 +22,18 @@ public class UserController {
         this.jdbcTemplate=jdbcTemplate;
     }
 
+
     @GetMapping("/userList")
     public Iterable<DefUsers> usersList(){
         Iterable<DefUsers> data = usersRepository.findAll();
         return data;
+    }
+
+    @PostMapping("/addUserJdbcTemplate")
+    public String userAddJdbcTemplate(@RequestParam String name, @RequestParam String pass){
+
+        this.jdbcTemplate.update("INSERT INTO def_users (name, pass) VALUES ('" + name + "','" + pass + "')");
+        return "Kayıt İşlemi Başarılı";
     }
 
     @PostMapping("/addUser")
@@ -37,9 +48,14 @@ public class UserController {
     return saved;
       }
 
-      @GetMapping("/userListJdbcTemplate")
-      public String userListJdbc(){
-        return "Deneme 344";
+
+
+    @GetMapping("/userListJdbcTemplate")
+    public List<DefUsers> userListJdbcTemplate(){
+    String sql ="select * from def_users";
+    List<DefUsers> usersList = jdbcTemplate.query(sql,bprm);
+    return usersList;
+
     }
 
     @GetMapping("/userListCurdRepo")
