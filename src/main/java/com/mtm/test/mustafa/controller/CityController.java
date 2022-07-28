@@ -1,9 +1,12 @@
 package com.mtm.test.mustafa.controller;
 
 
+import com.mtm.test.mustafa.entity.DefCity;
 import com.mtm.test.mustafa.exception.MtmException;
 import com.mtm.test.mustafa.service.CityService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 @RestController
@@ -17,54 +20,54 @@ public class CityController {
 
     //-----------------------------------------------------REPOSITORY
     @GetMapping("/cities")
-    public void cityList() {
-        cityService.cityList();
+    public Iterable<DefCity> cityList() {
+        return cityService.cityList();
     }
 
-    @GetMapping("/addCity")
-    public void addCity(@RequestParam String name) {
-        cityService.addCity(name);
+    @PostMapping("/addCity")
+    public String addCity(@RequestParam String name) {
+        return cityService.addCity(name);
     }
 
-    @GetMapping("/deleteCity{id}")
-    public void deleteCity(@PathVariable Integer id) throws Exception {
-        cityService.deleteCity(id);
+    @PostMapping("/deleteCity{id}")
+    public String deleteCity(@PathVariable Integer id) throws Exception {
+        return cityService.deleteCity(id);
     }
 
     @PutMapping("/updateCity{id}")
-    public void updateCity(@PathVariable Integer id, @RequestParam String name) throws Exception {
-        cityService.updateCity(id, name);
+    public String updateCity(@PathVariable Integer id, @RequestParam String name) throws Exception {
+        return cityService.updateCity(id, name);
     }
 
     @GetMapping("infoCity{id}")
-    public void infoCity(@PathVariable Integer id) throws Exception {
-        cityService.infoCity(id);
+    public DefCity infoCity(@PathVariable Integer id) throws Exception {
+        return cityService.infoCity(id);
     }
 
     //-----------------------------------------------------JdbcTemplate
     @GetMapping("citiesJdbcTemplate")
-    public void cityListJdbcTemplate() {
-        cityService.userListJdbcTemplate();
+    public List<DefCity> cityListJdbcTemplate() {
+        return cityService.userListJdbcTemplate();
     }
 
     @PostMapping("addCityJdbcTemplate")
-    public void addCityJdbcTemplate(String name) {
-        cityService.addCityJdbcTemplate(name);
+    public String addCityJdbcTemplate(String name) {
+        return cityService.addCityJdbcTemplate(name);
     }
 
     @PostMapping("deleteCityJdbcTemplate{id}")
-    public void deleteCityJdbcTemplate(@PathVariable Integer id) {
-        cityService.deleteCityJdbcTemplate(id);
+    public String deleteCityJdbcTemplate(@PathVariable Integer id) {
+        return cityService.deleteCityJdbcTemplate(id);
     }
 
     @PutMapping("updateCityJdbcTemplate{id}")
-    public void updateCityJdbcTemplate(@PathVariable Integer id, @RequestParam String name) {
-        cityService.updateCityJdbcTemplate(id, name);
+    public String updateCityJdbcTemplate(@PathVariable Integer id, @RequestParam String name) {
+        return cityService.updateCityJdbcTemplate(id, name);
     }
 
     @GetMapping("infoCityJdbcTemplate{id}")
-    public void infoCityJdbcTemplate(@PathVariable Integer id) throws MtmException {
-        cityService.infoCityJdbcTemplate(id);
+    public DefCity infoCityJdbcTemplate(@PathVariable Integer id) throws MtmException {
+        return cityService.infoCityJdbcTemplate(id);
     }
 
     /*

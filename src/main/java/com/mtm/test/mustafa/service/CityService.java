@@ -4,7 +4,6 @@ import com.mtm.test.mustafa.entity.DefCity;
 import com.mtm.test.mustafa.exception.MtmException;
 import com.mtm.test.mustafa.repository.DefCityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -30,11 +29,11 @@ public class CityService {
         return data;
     }
 
-    public DefCity addCity(String name) {
+    public String addCity(String name) {
         DefCity defCity = new DefCity();
         defCity.setName(name);
         DefCity saved = cityRepository.save(defCity);
-        return saved;
+        return "Şehir eklendi";
     }
 
     public String deleteCity(Integer id) throws Exception {
@@ -47,13 +46,13 @@ public class CityService {
         }
     }
 
-    public DefCity updateCity(Integer id, String name) throws Exception {
+    public String updateCity(Integer id, String name) throws Exception {
         Optional<DefCity> data = this.cityRepository.findById(id);
 
         if (data.isPresent()) {
             data.get().setName(name);
             this.cityRepository.save(data.get());
-            return data.get();
+            return "Şehir Güncellendi";
         } else {
             throw new MtmException(id + " id'sine karşılık var olan bir değer bulunamadı !");
         }
