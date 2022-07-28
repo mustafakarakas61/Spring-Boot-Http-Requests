@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
+@RequestMapping("/apiUser")
 public class UserController {
     private BeanPropertyRowMapper<DefUsers> bprm= new BeanPropertyRowMapper<DefUsers>(DefUsers.class);
     private DefUsersRepository usersRepository;
@@ -108,5 +109,8 @@ public class UserController {
             throw new MtmException("Bu id bulunamadı !");
         }
     }
+
+
+
 
 }
