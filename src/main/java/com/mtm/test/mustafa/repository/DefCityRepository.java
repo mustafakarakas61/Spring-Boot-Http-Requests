@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
+@Repository
 public interface DefCityRepository extends CrudRepository<DefCity,Integer> {
 
     public DefCity findByNameAndId(String name,Integer id);
